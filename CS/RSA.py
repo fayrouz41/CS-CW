@@ -1,31 +1,13 @@
-import random 
-m=int(input ("enter a number that will be encrypted"))
+import math
+import random
 
 def prime(z):
     if z <= 1:
         return False
-    elif z <= 3:
-        return True
-    elif z % 2 == 0 or z % 3 == 0:
-        return False
-    i = 5
-    while i * i <= z:
-        if z % i == 0 or z % (i + 2) == 0:
+    for i in range(2, int(z**0.5) + 1):
+        if z % i == 0:
             return False
-        i += 6
     return True
-
-
-p = int(input("Enter a prime number (p): "))
-q = int(input("Enter another prime number (q): "))
-
-if not (prime(p) and prime(q)):
-    print("Both p and q must be prime numbers.")
-
-
-n = p*q
-eul= (p-1)*(q-1)
-
 
 def extended_gcd(a,b): 
     x0,x1,y0,y1 = 1, 0, 0, 1
@@ -35,9 +17,24 @@ def extended_gcd(a,b):
         y0, y1 = y1, y0 - q * y1
     return a, x0, y0
 
-e = random.randint(2, eul - 1)
+def mod_inverse(a,m):
+    gcd, x, _= extended_gcd(a,m)
+    if gcd!=1:
+        raise ValueError("Invers does not exist.")
+    else: 
+        return x%m
 
-gcd, x, y =extended_gcd(e,eul)
+m=int(input ("enter a plaintext integer that will be encrypted"))
+p = int(input("Enter a prime number (p): "))
+q = int(input("Enter another prime number (q): "))
+
+if not (prime(p) and prime(q)):
+    print("Both p and q must be prime numbers.")
+
+n = p*q
+eul= (p-1)*(q-1)
+
+e = 17
 
    
 while e < eul:
@@ -46,14 +43,9 @@ while e < eul:
     else: 
         e+=1
 
-def mod_inverse(a,m):
-    gcd, x, _= extended_gcd(a,m)
-    if gcd!=1:
-        raise ValueError("Invers does not exist.")
-    else: 
-        return x%m
 
-d=x
+
+d=mod_inverse(e, eul)
 print(f"public:{n,e}")
 print(f"private:{n,d}")
 
