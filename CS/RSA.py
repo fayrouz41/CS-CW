@@ -10,6 +10,8 @@ def generate_rsa_keys(bit_length=16):
     eul = (p - 1) * (q - 1)
     e = choose_public_exponent(eul)
     d = modular_inverse(e, eul)
+    if e == d:
+        e = random.randrange(2, eul)
 
     public_key = (n, e)
     private_key = (n, d)
@@ -79,12 +81,24 @@ def modular_inverse(e, eul):
     else:
         raise ValueError("No modular inverse exists")
 
+# def encrypt(m, public_key):
+#     n, e = public_key
+#     return pow(m, e, n)
+
+# def decrypt(c, private_key):
+#     n, d = private_key
+#     return pow(c, d, n)
+
 def encrypt(m, public_key):
     n, e = public_key
+    if m >= n:
+        print( ValueError(f"the number entered cannot be greater than {n}"))
     return pow(m, e, n)
 
 def decrypt(c, private_key):
     n, d = private_key
+    # if c >= n:
+    #     print( ValueError(f"the number entered cannot be greater than {n}"))
     return pow(c, d, n)
 
 public_key, private_key = generate_rsa_keys(bit_length=16)
