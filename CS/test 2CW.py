@@ -7,8 +7,6 @@ if bits != 8:
     if bits != 16:
         raise ValueError("Input can only be 8 or 16")
 
-
-
 def is_prime(n, k=5):
    
     if n <= 1:
@@ -78,16 +76,13 @@ def generate_rsa_keys():
     private_key = (n, d)
     return public_key, private_key
 
-
 def choose_public_exponent(eul):
 
     e = random.randrange(2, eul)
     while math.gcd(e, eul) != 1:
         e = random.randrange(2, eul)
-    print(f"make sure that the plaintext is greater than {e}")
+    print(f"Make sure that the plaintext is greater than {e}")
     return e
-
-
 
 def extended_euclidean_algorithm(a, b):
 
@@ -117,15 +112,12 @@ def decrypt(c, private_key):
     n, d = private_key
     return pow(c, d, n)
 
-
 public_key, private_key = generate_rsa_keys()
 
 print("Public Key (n, e):", public_key)
 print("Private Key (n, d):", private_key)
 
-
 m=int(input ("Enter a plaintext message: "))
-
 c= encrypt(m, public_key)
 print("Ciphertext:", c)
 decrypted_message = decrypt(c, private_key)
