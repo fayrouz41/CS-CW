@@ -84,7 +84,7 @@ def choose_public_exponent(eul):
     e = random.randrange(2, eul)
     while math.gcd(e, eul) != 1:
         e = random.randrange(2, eul)
-    print(f"Make sure that the plaintext is greater than {e}")
+    print(f"Make sure that the plaintext is greater than {e} ")
     return e
 
 def brute_force_d(e, eul):
