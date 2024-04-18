@@ -40,13 +40,13 @@ def generate_rsa_keys(bit_length=16):
     # start_time = time.time()
 
     p = int(input("Enter a prime number (p): "))
-    if p is is_prime:
-        return True 
-    else: 
-        quit
-    # print(is_prime(p))
+    if not is_prime(p):
+        print("p is not a prime number.")
+        raise ValueError("The number is not prime")
     q = int(input("Enter another prime number (q): "))
-    print(is_prime(q))
+    if not is_prime(q):
+        print("q is not a prime number.")
+        raise ValueError("The number is not prime")
     n = p * q
     eul = (p - 1) * (q - 1)
     e = choose_public_exponent(eul)
@@ -178,6 +178,7 @@ def decrypt(c, private_key):
 
 
 public_key, private_key = generate_rsa_keys(bit_length=16)
+
 print("Public Key (n, e):", public_key)
 print("Private Key (n, d):", private_key)
 
