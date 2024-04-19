@@ -112,7 +112,7 @@ print("Private Key (n, d):", private_key)
 
 m=int(input ("Enter a plaintext message: "))
 c= encrypt(m, public_key)
-print("Ciphertext:", c)
+print("Encrypted message:", c)
 decrypted_message = decrypt(c, private_key)
 print("Decrypted message:", decrypted_message)
 
