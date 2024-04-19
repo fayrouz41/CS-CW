@@ -7,40 +7,6 @@ if bits != 8:
     if bits != 16:
         raise ValueError("Input can only be 8 or 16")
 
-
-
-# def is_prime(n, k=5):
-   
-#     if n <= 1:
-#         return False
-#     if n <= 3:
-#         return True
-#     if n % 2 == 0:
-#         return False
-        
-#     r = 0
-#     d = n - 1
-#     while d % 2 == 0:
-#         d //= 2
-#         r += 1
-
-#     def miller_rabin_test(a):
-#         x = pow(a, d, n)
-#         if x == 1 or x == n - 1:
-#             return True
-#         for _ in range(r - 1):
-#             x = pow(x, 2, n)
-#             if x == n - 1:
-#                 return True
-#         return False
-    
-#     for _ in range(k):
-#         a = random.randrange(2, n - 1)
-#         if not miller_rabin_test(a):
-#             return False
-    
-#     return True
-
 def is_prime(n):
     if n <= 1:
         return False
@@ -92,9 +58,7 @@ def generate_rsa_keys():
     private_key = (n, d)
     return public_key, private_key
 
-
 def choose_public_exponent(eul):
-
     e = random.randrange(2, eul)
     while math.gcd(e, eul) != 1:
         e = random.randrange(2, eul)
@@ -117,12 +81,10 @@ def decrypt(c, private_key):
     n, d = private_key
     return pow(c, d, n)
 
-
 public_key, private_key = generate_rsa_keys()
 
 print("Public Key (n, e):", public_key)
 print("Private Key (n, d):", private_key)
-
 
 m=int(input ("Enter a plaintext message: "))
 
