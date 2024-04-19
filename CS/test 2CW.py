@@ -64,20 +64,16 @@ def generate_rsa_keys():
     d = modular_inverse(e, eul)
 
     end = time.perf_counter()
-    
     runtime = end - start
-
     print(f"The runtime for getting d is {runtime} seconds")
 
     if e == d:
         e = random.randrange(2, eul)
-
     public_key = (n, e)
     private_key = (n, d)
     return public_key, private_key
 
 def choose_public_exponent(eul):
-
     e = random.randrange(2, eul)
     while math.gcd(e, eul) != 1:
         e = random.randrange(2, eul)
@@ -85,13 +81,11 @@ def choose_public_exponent(eul):
     return e
 
 def extended_euclidean_algorithm(a, b):
-
     if b == 0:
         return a, 1, 0
     gcd, x1, y1 = extended_euclidean_algorithm(b, a % b)
     x = y1
     y = x1 - (a // b) * y1
-
     return gcd, x, y
 
 
@@ -111,7 +105,6 @@ def encrypt(m, public_key):
 def decrypt(c, private_key):
     n, d = private_key
     return pow(c, d, n)
-
 public_key, private_key = generate_rsa_keys()
 
 print("Public Key (n, e):", public_key)
