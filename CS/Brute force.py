@@ -9,36 +9,50 @@ if bits != 8:
 
 
 
-def is_prime(n, k=5):
+# def is_prime(n, k=5):
    
+#     if n <= 1:
+#         return False
+#     if n <= 3:
+#         return True
+#     if n % 2 == 0:
+#         return False
+        
+#     r = 0
+#     d = n - 1
+#     while d % 2 == 0:
+#         d //= 2
+#         r += 1
+
+#     def miller_rabin_test(a):
+#         x = pow(a, d, n)
+#         if x == 1 or x == n - 1:
+#             return True
+#         for _ in range(r - 1):
+#             x = pow(x, 2, n)
+#             if x == n - 1:
+#                 return True
+#         return False
+    
+#     for _ in range(k):
+#         a = random.randrange(2, n - 1)
+#         if not miller_rabin_test(a):
+#             return False
+    
+#     return True
+
+def is_prime(n):
     if n <= 1:
         return False
     if n <= 3:
         return True
     if n % 2 == 0:
         return False
-        
-    r = 0
-    d = n - 1
-    while d % 2 == 0:
-        d //= 2
-        r += 1
-
-    def miller_rabin_test(a):
-        x = pow(a, d, n)
-        if x == 1 or x == n - 1:
-            return True
-        for _ in range(r - 1):
-            x = pow(x, 2, n)
-            if x == n - 1:
-                return True
-        return False
-    
-    for _ in range(k):
-        a = random.randrange(2, n - 1)
-        if not miller_rabin_test(a):
+    i = 3
+    while i * i <= n:
+        if n % i == 0:
             return False
-    
+        i += 2
     return True
 
 def generate_rsa_keys():
@@ -113,6 +127,6 @@ print("Private Key (n, d):", private_key)
 m=int(input ("Enter a plaintext message: "))
 
 c= encrypt(m, public_key)
-print("Ciphertext:", c)
+print("Encrypted message:", c)
 decrypted_message = decrypt(c, private_key)
 print("Decrypted message:", decrypted_message)
