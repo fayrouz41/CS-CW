@@ -47,9 +47,9 @@ def generate_rsa_keys():
 
     end = time.perf_counter()
     
-    runtime = end - start
+    runtime = (end - start)*1000
 
-    print(f"The runtime for getting d is {runtime} seconds")
+    print(f"The runtime for getting d is {runtime} milliseconds")
 
     if e == d:
         e = random.randrange(2, eul)
