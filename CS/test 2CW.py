@@ -46,8 +46,8 @@ def generate_rsa_keys():
     d = modular_inverse(e, eul)
 
     end = time.perf_counter()
-    runtime = end - start
-    print(f"The runtime for getting d is {runtime} seconds")
+    runtime = (end - start)*1000
+    print(f"The runtime for getting d is {runtime} milliseconds")
 
     if e == d:
         e = random.randrange(2, eul)
